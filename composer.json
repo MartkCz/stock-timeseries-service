@@ -1,0 +1,11 @@
+{
+    "name": "bulios/stock-timeseries-service",
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Api\\StockTimeSeries\\": "src"
+        }
+    }
+}
