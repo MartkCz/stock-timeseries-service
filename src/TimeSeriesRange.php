@@ -2,7 +2,6 @@
 
 namespace Api\StockTimeSeries;
 
-use Api\StockTimeSeries\TimeSeriesType;
 use DateTimeInterface;
 
 enum TimeSeriesRange: string
