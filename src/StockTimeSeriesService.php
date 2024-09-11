@@ -2,45 +2,19 @@
 
 namespace Api\StockTimeSeries;
 
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Api\Core\Service;
+use Api\Core\ServiceRequest;
 
-final class StockTimeSeriesService
+final class StockTimeSeriesService extends Service
 {
 
 	public const TimeSeriesLink = '/api/timeseries-service/time-series';
 
-	private HttpClientInterface $httpClient;
-
-	public function __construct(
-		private string $baseUrl,
-		?HttpClientInterface $httpClient,
-	)
+	public function timeSeries(string $symbol, TimeSeriesRange $range): ServiceRequest
 	{
-		$this->httpClient = $httpClient ?? HttpClient::create();
-	}
-
-	public function getTimeSeries(string $symbol, TimeSeriesRange $range): array
-	{
-		$response = $this->httpClient->request('GET', $this->buildUrl(self::TimeSeriesLink . '/' . $symbol, [
+		return $this->requestGet(self::TimeSeriesLink . '/' . $symbol, [
 			'range' => $range->value,
-		]));
-
-		return $response->toArray();
-	}
-
-	/**
-	 * @param array<string, scalar> $params
-	 */
-	private function buildUrl(string $path, array $params = []): string
-	{
-		$url = $this->baseUrl . $path;
-
-		if (count($params) > 0) {
-			$url .= '?' . http_build_query($params);
-		}
-
-		return $url;
+		]);
 	}
 
 }
