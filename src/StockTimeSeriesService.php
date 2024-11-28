@@ -9,7 +9,7 @@ final class StockTimeSeriesService extends Service
 {
 
 	public const TimeSeriesLink = '/api/timeseries-service/time-series';
-	public const MultipleTimeSeriesLink = '/api/timeseries-service/time-series/multiple';
+	public const MultipleTimeSeriesLink = '/api/timeseries-service/multiple-time-series';
 
 	public function timeSeries(string $symbol, TimeSeriesRange $range): ServiceRequest
 	{
